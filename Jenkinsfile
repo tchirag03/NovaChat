@@ -1,42 +1,35 @@
 pipeline {
-    agent any // Runs on any available Jenkins node
+    agent any
 
     stages {
-        stage('Pull Code') {
+        stage('Checkout') {
             steps {
-                // This checks out the code from your GitHub repo
                 checkout scm
             }
         }
         
-        stage('Show Updates') {
+        stage('Show Git Changes') {
             steps {
                 script {
-                    // Grab the list of changes in this specific build
-                    def changeLogSets = currentBuild.changeSets
-                    
-                    if (changeLogSets.isEmpty()) {
-                        echo "No new commits. This build might have been triggered manually."
+                    def changes = currentBuild.changeSets
+                    if (changes.isEmpty()) {
+                        echo "No new changes found."
                     } else {
-                        echo "=== UPDATES IN THIS BUILD ==="
-                        for (int i = 0; i < changeLogSets.size(); i++) {
-                            def entries = changeLogSets[i].items
+                        echo "====================================="
+                        echo "   UPDATES FETCHED FROM GITHUB       "
+                        echo "====================================="
+                        for (int i = 0; i < changes.size(); i++) {
+                            def entries = changes[i].items
                             for (int j = 0; j < entries.length; j++) {
                                 def entry = entries[j]
-                                // Print the commit hash, message, and author to the console
-                                echo "- Commit ${entry.commitId.take(7)}: ${entry.msg} (by ${entry.author})"
+                                echo "Commit: ${entry.commitId}"
+                                echo "Author: ${entry.author}"
+                                echo "Message: ${entry.msg}"
+                                echo "-------------------------------------"
                             }
                         }
-                        echo "============================="
                     }
                 }
-            }
-        }
-
-        stage('Build and Test') {
-            steps {
-                echo "Here is where you compile your code or run tests!"
-                // Example: sh 'npm install' or sh 'make build'
             }
         }
     }

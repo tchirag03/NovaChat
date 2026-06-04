@@ -1,6 +1,16 @@
 # NovaChat - Realtime Chat App 💬
 
+[![React](https://img.shields.io/badge/React-18.x-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://reactjs.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-16+-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
+[![Socket.io](https://img.shields.io/badge/Socket.IO-4.x-010101?style=for-the-badge&logo=socket.io&logoColor=white)](https://socket.io/)
+[![Redis](https://img.shields.io/badge/Redis-7.x-DC382D?style=for-the-badge&logo=redis&logoColor=white)](https://redis.io/)
+[![Cloudinary](https://img.shields.io/badge/Cloudinary-Media-3448C5?style=for-the-badge&logo=cloudinary&logoColor=white)](https://cloudinary.com/)
+
 A blazing-fast, real-time web chat application built using the powerful combination of React, Node.js, Socket.IO, and Redis. It features intuitive global public chat rooms, direct private messaging, online status tracking, and cloud-hosted profile customization.
+
+> [!TIP]
+> **Preparing a Presentation / PPT for this project?**  
+> We have created a comprehensive, slide-by-slide outline, architectural talking points, and technical FAQs in [context.md](file:///c:/Users/tchir/Desktop/New%20folder%20(3)/NovaChat/context.md). Use it to design an outstanding PowerPoint or Google Slides deck!
 
 ---
 

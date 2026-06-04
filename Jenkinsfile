@@ -1,8 +1,11 @@
 pipeline {
     agent any
+    
+    tools {
+        nodejs 'node' // This tells Jenkins to use the 'node' tool we just configured
+    }
 
     environment {
-        // We will define your application/Docker configurations here later
         IMAGE_NAME = "my-devops-app"
         PORT = "8080" 
     }

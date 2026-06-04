@@ -42,11 +42,22 @@ pipeline {
         stage('Build & Test') {
             steps {
                 echo "====================================="
-                echo "   RUNNING CI: BUILDING & TESTING    "
+                echo "   BUILDING BACKEND (EXPRESS)        "
                 echo "====================================="
-                // STEP 1 PLACEHOLDER: Put your compile/test commands here
-                // e.g., sh 'npm install && npm test' or 'python3 -m pytest'
-                echo "Build and tests passed successfully!"
+                dir('backend') {
+                    // Steps into the backend folder and installs node modules
+                    sh 'npm install'
+                }
+                
+                echo "====================================="
+                echo "   BUILDING FRONTEND (REACT)         "
+                echo "====================================="
+                dir('frontend') {
+                    // Steps into the frontend folder, installs modules, and compiles React
+                    sh 'npm install'
+                    sh 'npm run build' 
+                }
+                echo "CI Check: Both Frontend and Backend compiled with zero errors!"
             }
         }
 

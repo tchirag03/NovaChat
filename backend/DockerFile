@@ -17,5 +17,5 @@ COPY . .
 # Expose the port your Express server listens on (NovaChat default is 3001)
 EXPOSE 3001
 
-# Command to run your app
+
 CMD ["node", "server.js"]

@@ -67,24 +67,34 @@ pipeline {
         stage('Docker Package') {
             steps {
                 echo "====================================="
-                echo "   CONTAINERIZING THE APPLICATION    "
+                echo "   BUILDING REAL DOCKER IMAGES       "
                 echo "====================================="
-                // STEP 2 PLACEHOLDER: Build a Docker image to satisfy Infrastructure Setup
-                // sh "docker build -t ${IMAGE_NAME}:latest ."
-                echo "Docker image built: ${IMAGE_NAME}:latest"
+                // Build the backend container image from the backend directory
+                sh 'docker build -t novachat-backend:latest ./backend'
+                
+                // Build the frontend container image from the frontend directory
+                sh 'docker build -t novachat-frontend:latest ./frontend'
             }
         }
 
         stage('Continuous Deployment') {
             steps {
                 echo "====================================="
-                echo "         DEPLOYING THE APP           "
+                echo "   LAUNCHING CONTAINERS (LIVE DEPLOY) "
                 echo "====================================="
-                // STEP 3 PLACEHOLDER: Stop old container and run the new one
-                // sh "docker stop ${IMAGE_NAME} || true"
-                // sh "docker rm ${IMAGE_NAME} || true"
-                // sh "docker run -d --name ${IMAGE_NAME} -p ${PORT}:${PORT} ${IMAGE_NAME}:latest"
-                echo "Application successfully deployed to http://localhost:${PORT}"
+                // 1. Clean up old running containers if they exist so there are no port conflicts
+                sh 'docker stop novachat-backend novachat-frontend || true'
+                sh 'docker rm novachat-backend novachat-frontend || true'
+                
+                // 2. Run Backend on port 5000
+                sh 'docker run -d --name novachat-backend -p 5000:5000 novachat-backend:latest'
+                
+                // 3. Run Frontend on port 8080 (Maps host port 8080 to Nginx port 80)
+                sh 'docker run -d --name novachat-frontend -p 8080:80 novachat-frontend:latest'
+                
+                echo "=========================================================="
+                echo " LIVE CHANGES ARE NOW ACCESSIBLE AT: http://localhost:8080 "
+                echo "=========================================================="
             }
         }
     }

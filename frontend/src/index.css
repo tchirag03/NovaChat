@@ -4,8 +4,8 @@
   --bg-tertiary: #232936;
   --text-primary: #f0f6fc;
   --text-secondary: #9da5b4;
-  --accent-color: #ec4899; /* Changed from #3b82f6 to vibrant pink to verify CI/CD */
-  --accent-hover: #db2777; /* Changed from #2563eb */
+  --accent-color: #81ec48; /* Changed from #3b82f6 to vibrant pink to verify CI/CD */
+  --accent-hover: #beeb1d; /* Changed from #2563eb */
   --accent-gradient: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%); /* Pink to Violet gradient */
   --error-color: #ef4444;
   --success-color: #10b981;
